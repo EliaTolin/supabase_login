@@ -51,14 +51,39 @@ get_token() {
 
 # --- Commands ---
 
+cmd_guided_add() {
+  echo "  No accounts found. Let's add your first one!"
+  echo ""
+  echo "  Get your token here:"
+  echo "  → https://supabase.com/dashboard/account/tokens"
+  echo ""
+  read -rp "  Account name (e.g. myproject): " name
+  if [[ -z "$name" ]]; then
+    echo "  Aborted."
+    exit 1
+  fi
+  read -rp "  Access token (sbp_...): " token
+  if [[ -z "$token" ]]; then
+    echo "  Aborted."
+    exit 1
+  fi
+  echo ""
+  cmd_add "$name" "$token"
+  echo ""
+  read -rp "  Login now as '$name'? [Y/n] " confirm
+  if [[ -z "$confirm" || "$confirm" =~ ^[Yy]$ ]]; then
+    cmd_use "$name"
+  fi
+}
+
 cmd_add() {
   local name="$1"
   local token="$2"
 
   if [[ -z "$name" || -z "$token" ]]; then
-    echo "Usage: supawho add <name> <token>"
-    echo "Example: supawho add ermanno sbp_xxx..."
-    exit 1
+    show_banner
+    cmd_guided_add
+    exit 0
   fi
 
   # Save token to Keychain
@@ -141,25 +166,7 @@ cmd_interactive() {
   show_banner
 
   if [[ -z "$list" ]]; then
-    echo "  No accounts found. Let's add your first one!"
-    echo ""
-    read -rp "  Account name (e.g. myproject): " name
-    if [[ -z "$name" ]]; then
-      echo "  Aborted."
-      exit 1
-    fi
-    read -rp "  Access token (sbp_...): " token
-    if [[ -z "$token" ]]; then
-      echo "  Aborted."
-      exit 1
-    fi
-    echo ""
-    cmd_add "$name" "$token"
-    echo ""
-    read -rp "  Login now as '$name'? [Y/n] " confirm
-    if [[ -z "$confirm" || "$confirm" =~ ^[Yy]$ ]]; then
-      cmd_use "$name"
-    fi
+    cmd_guided_add
     exit 0
   fi
 
