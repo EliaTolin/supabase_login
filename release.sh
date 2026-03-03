@@ -1,8 +1,19 @@
 #!/bin/bash
 set -euo pipefail
 
-# Usage: ./release.sh [major|minor|patch]
-# Default: patch
+# Release script for supawho
+#
+# Usage:
+#   ./release.sh patch    # 1.2.0 → 1.2.1  (bugfix)
+#   ./release.sh minor    # 1.2.0 → 1.3.0  (new feature)
+#   ./release.sh major    # 1.2.0 → 2.0.0  (breaking change)
+#   ./release.sh          # default: patch
+#
+# What it does:
+#   1. Bumps VERSION in the supawho script
+#   2. Commits and tags the new version
+#   3. Pushes commit + tag to GitHub
+#   4. GitHub Action auto-updates the Homebrew formula
 
 SCRIPT="supawho"
 BUMP="${1:-patch}"
