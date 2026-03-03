@@ -11,6 +11,19 @@
 # Install globally:
 #   cp supawho /usr/local/bin/ && chmod +x /usr/local/bin/supawho
 
+show_banner() {
+  local green=$'\033[1;32m'
+  local reset=$'\033[0m'
+  echo ""
+  printf '%s%s%s\n' "$green" '   ___  _   _ ___  ___  _    _ _  _  ___' "$reset"
+  printf '%s%s%s\n' "$green" '  / __|| | | | _ \/ _ \| |  | | || |/ _ \' "$reset"
+  printf '%s%s%s\n' "$green" '  \__ \| |_| |  _/ (_) | |/\| | __ | (_)' "$reset"
+  printf '%s%s%s\n' "$green" '  |___/ \___/|_|  \__\_\__/\__|_||_|\___/' "$reset"
+  echo ""
+  echo "     🔍 Who are you today?"
+  echo ""
+}
+
 KEYCHAIN_SERVICE="supabase-cli-accounts"
 KEYCHAIN_INDEX_KEY="_account_list"
 
@@ -133,6 +146,7 @@ cmd_interactive() {
   local accounts=()
   IFS=',' read -ra accounts <<< "$list"
 
+  show_banner
   echo "Select an account:"
   echo ""
   for i in "${!accounts[@]}"; do
@@ -166,8 +180,7 @@ case "${1:-}" in
     cmd_use "$2"
     ;;
   help|--help|-h)
-    echo "supawho - Manage multiple Supabase accounts"
-    echo ""
+    show_banner
     echo "Usage:"
     echo "  supawho                       Interactive account selection"
     echo "  supawho add <name> <token>     Save account to Keychain"
