@@ -26,6 +26,18 @@ Tokens are stored securely in **macOS Keychain**.
 brew install EliaTolin/tap/supawho
 ```
 
+**Shell** (one-liner):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/EliaTolin/supawho/main/install.sh | bash
+```
+
+Install a specific version:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/EliaTolin/supawho/main/install.sh | bash -s 1.0.0
+```
+
 <details>
 <summary>📦 Manual installation</summary>
 
