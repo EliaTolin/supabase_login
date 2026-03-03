@@ -1,28 +1,35 @@
 <div align="center">
 
-<img src="image.png" alt="supawho" width="200" />
+<img src="image.png" alt="supawho" width="400" />
 
-Switch between multiple Supabase accounts in seconds.<br>
+<br>
+
+Switch between multiple **Supabase** accounts in seconds.<br>
 Tokens are stored securely in **macOS Keychain**.
 
-[![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=fff)](#)
-[![macOS](https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=fff)](#)
-[![Homebrew](https://img.shields.io/badge/Homebrew-FBB040?logo=homebrew&logoColor=fff)](#installation)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<br>
+
+[![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=fff)](#)
+[![macOS](https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=fff)](#)
+[![Homebrew](https://img.shields.io/badge/Homebrew-FBB040?style=for-the-badge&logo=homebrew&logoColor=fff)](#-installation)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 </div>
 
----
+<br>
 
-## Installation
+## 🍺 Installation
 
-### Homebrew (recommended)
+**Homebrew** (recommended):
 
 ```bash
 brew install EliaTolin/tap/supawho
 ```
 
-### Manual
+<details>
+<summary>📦 Manual installation</summary>
+
+<br>
 
 ```bash
 git clone git@github.com:EliaTolin/supawho.git
@@ -36,42 +43,40 @@ echo 'alias supawho="/path/to/supawho/supawho"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
----
+</details>
 
-## Getting your Supabase Access Token
+<br>
 
-Before using supawho, you need to generate an access token from the Supabase dashboard:
+## 🔑 Getting your Supabase Access Token
 
-1. Go to [supabase.com/dashboard](https://supabase.com/dashboard) and click on your **profile icon** (top right)
+1. Open [**supabase.com/dashboard**](https://supabase.com/dashboard) and click your **profile icon** (top right)
 2. Select **Account preferences**
-3. Navigate to **Access Tokens** in the left sidebar
-4. Click **Generate new token**, give it a name, and copy the token
+3. Go to **Access Tokens** in the left sidebar
+4. Click **Generate new token**, give it a name and copy the token
 
-> **Tip:** The token starts with `sbp_` and is shown only once — make sure to copy it!
+> 💡 The token starts with `sbp_` and is shown **only once** — make sure to copy it!
 
-Then save it with:
-
-```bash
-supawho add <name> <token>
-```
-
----
-
-## Usage
-
-### Add an account
+Then save it:
 
 ```bash
 supawho add myproject sbp_xxxxxxxxxxxxx
 ```
 
-### Switch account (interactive)
+<br>
 
-Run without arguments to select interactively:
+## 🚀 Usage
 
-```bash
-supawho
-```
+| Command | Description |
+|---------|-------------|
+| `supawho` | Interactive account picker |
+| `supawho add <name> <token>` | Save a new account |
+| `supawho use <name>` | Switch to an account |
+| `supawho list` | Show all saved accounts |
+| `supawho remove <name>` | Delete an account |
+
+### Interactive mode
+
+Just run `supawho` with no arguments:
 
 ```
    ___  _   _ ___  ___  _    _ _  _  ___
@@ -89,45 +94,28 @@ Select an account:
 Enter number (1-2):
 ```
 
-### Switch account (direct)
+<br>
 
-```bash
-supawho use myproject
-```
+## 🔒 Why is it secure?
 
-### List saved accounts
+Your tokens **never touch the filesystem**. They are stored exclusively in the **macOS Keychain**, the same encrypted vault that Safari and the system use for passwords and certificates.
 
-```bash
-supawho list
-```
+| | supawho | Plain text files |
+|---|:---:|:---:|
+| Encrypted at rest | ✅ | ❌ |
+| Protected by system login | ✅ | ❌ |
+| Visible to other processes | ❌ | ✅ |
+| Survives accidental `git add .` | ✅ | ❌ |
 
-### Remove an account
+<br>
 
-```bash
-supawho remove myproject
-```
+## 📋 Requirements
 
----
+- **macOS** — uses the `security` command for Keychain access
+- [**Supabase CLI**](https://supabase.com/docs/guides/cli) — installed and available in `$PATH`
 
-## How it works
+<br>
 
-| Step | What happens |
-|------|-------------|
-| `supawho add` | Saves the token in **macOS Keychain** |
-| `supawho use` | Reads the token from Keychain and runs `supabase login --token` |
-| `supawho remove` | Deletes the token from Keychain |
+## 📄 License
 
-Your tokens never touch the filesystem — they live in the encrypted Keychain only.
-
----
-
-## Requirements
-
-- **macOS** (uses the `security` command for Keychain access)
-- [**Supabase CLI**](https://supabase.com/docs/guides/cli) installed
-
----
-
-## License
-
-[MIT](LICENSE) — Made by [Elia Tolin](https://github.com/EliaTolin)
+[MIT](LICENSE) — Made with 💚 by [Elia Tolin](https://github.com/EliaTolin)
