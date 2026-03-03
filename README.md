@@ -10,19 +10,24 @@ CLI tool to manage multiple Supabase accounts. Tokens are stored securely in **m
 
 ```bash
 git clone git@github.com:EliaTolin/supabase_login.git
-cd supabase_login
 ```
 
 2. Make the script executable:
 
 ```bash
-chmod +x supabase_login
+chmod +x supabase_login/supabase_login
 ```
 
 3. Add an alias to your shell config (`~/.zshrc` or `~/.bashrc`):
 
 ```bash
-alias supabase_login="/path/to/supabase_login"
+echo 'alias supabase_login="/path/to/supabase_login/supabase_login"' >> ~/.zshrc
+```
+
+4. Reload the shell:
+
+```bash
+source ~/.zshrc
 ```
 
 ## Usage
